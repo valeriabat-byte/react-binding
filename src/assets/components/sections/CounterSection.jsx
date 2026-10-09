@@ -9,6 +9,8 @@ export default function Counter() {
     const toDo = ["stirare", "lavare i piatti", "cucire", "cucinare", "ballare"];
     const [barrati, setBarrati] = useState(new Set());
 
+    const [accepted, setAccepted] = useState([]);
+
     function handleCount() {
         setCount(count + 1);
     }
@@ -70,6 +72,55 @@ export default function Counter() {
                         </li>
                     ))}
                 </ul>
+            </section>
+
+            {/** checkbox */}
+            <section className="flex justify-content-center align-items-center">
+                <div className="form-check">
+                    <input type="checkbox" name="account" id="acceptance"
+                        className="form-check-input border-black border-3"
+                        /** controlla se c'è lo zero nell'elemento dell'array accepted */
+                        checked={accepted.includes(0)}
+                        onChange={(e) => {
+                            if (e.target.checked) {
+                                {/** metto lo zero nell elemento dell array accepted */ }
+                                setAccepted([...accepted, 0]);
+                            } else {
+                                {/** tolgo lo zero modificando l'array con filter, facendo passare tutti tranne quelli che contengono zero */ }
+                                setAccepted(accepted.filter((n) => n !== 0));
+                            }
+                        }}></input>
+                    <label htmlFor="acceptance" className="form-check-label"
+                        style={{ textDecoration: accepted.includes(0) ? "line-through" : "none" }}>
+                        {toDo[0]}</label>
+                </div>
+
+                <div className="form-check">
+                    <input type="checkbox" name="account" id="acceptance"
+                        className="form-check-input border-black border-3"
+                        checked={accepted.includes(1)}
+                        onChange={(e) => {
+                            if (e.target.checked) {
+                                setAccepted([...accepted, 1]);
+                            } else {
+                                setAccepted(accepted.filter((n) => n !== 1));
+                            }
+                        }}></input>
+                    <label htmlFor="acceptance" className="form-check-label"
+                        style={{ textDecoration: accepted.includes(1) ? "line-through" : "none" }}>
+                        {toDo[1]}</label>
+                </div>
+
+                {/*<div className="form-check">
+                    <input type="checkbox" name="account" id="acceptance"
+                        className="form-check-input border-black border-3"
+                        checked={accepted}
+                        onChange={(e) => {
+                            setAccepted(e.target.checked)
+                        }}></input>
+                    <label htmlFor="acceptance" className="form-check-label" style={{ textDecoration: accepted ? "line-through" : "none" }}>
+                        {toDo[1]}</label>
+                </div>*/}
             </section>
         </>
     );
